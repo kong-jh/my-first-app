@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
 var mysql = require('mysql');
 
 const conn = mysql.createConnection({
@@ -23,10 +26,10 @@ app.get('/', (req, res) => {
             console.log(err);
             res.status(500).send('error');
         }
-        res.send(words);
+        res.render('view', {words:words});
     })
 });
 
-var server = app.listen(3000, () => {
-    console.log("server listening on port 3000");
+var server = app.listen(3001, () => {
+    console.log("server listening on port 3001");
 });

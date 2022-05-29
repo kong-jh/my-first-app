@@ -1,0 +1,27 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>my first app</title>
+</head>
+
+<body style="background-color:yellowgreen;">
+    <div style="text-align:center">
+        <h1><a href='/'>My WorDisk</a></h1>
+    </div>
+    <br>
+
+    <div style="background-color:snow; width:250px; margin:auto">
+        <h2 style="color:gray">list</h2>
+        <% if(words.length > 0) { %>
+        <ul>
+            <% for(var i=0; i< words.length; i++) { %>
+                <li><a href="/<%= words[i].id %>"><%= words[i].title %></a></li>
+            <% } %>
+        </ul>
+        <% } else { %>
+            <p>There is no such word, <br> please add</p>
+        <% } %>
+    </div>
+
+</body>
+</html>
