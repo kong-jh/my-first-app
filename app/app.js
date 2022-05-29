@@ -19,14 +19,27 @@ const conn = mysql.createConnection({
 
 conn.connect();
 
-app.get('/', (req, res) => {
+app.get(['/', '/:id'], (req, res) => {
     var sql = 'SELECT id, title, mean FROM word';
     conn.query(sql, function(err, words){
         if(err) {
             console.log(err);
             res.status(500).send('error');
         }
-        res.render('view', {words:words});
+        var id = req.params.id;
+        if(id) {
+            var sql = 'SELECT * FROM word WHERE id=?';
+            conn.query(sql, [id], function(err, word){
+                if(err) {
+                    console.log(err);
+                    res.status(500).send('error');
+                } else {
+                    res.render('view', {words:words, word:word[0]});
+                }
+            });
+        } else {
+            res.render('view', {words:words});
+        }
     })
 });
 

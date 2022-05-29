@@ -7,6 +7,11 @@
 <body style="background-color:yellowgreen;">
     <div style="text-align:center">
         <h1><a href='/'>My WorDisk</a></h1>
+        <br>
+        <form action="/search" method="POST">
+            <input type="text" name="title" placeholder="word">
+            <button type="submit">search</button>
+        </form>
     </div>
     <br>
 
@@ -21,7 +26,17 @@
         <% } else { %>
             <p>There is no such word, <br> please add</p>
         <% } %>
+        <p><a href='/add'>add</a></p>
     </div>
+
+    <% if(locals.word) { %>
+        <div style="background-color:lightgrey; width:250px; margin:auto">
+            <h2><%= word.title %></h2>
+            <p><%= word.mean %></p>
+            <a href="/<%= word.id %>/edit">edit</a>
+            <a href="/<%= word.id %>/delete">delete</a>
+        </div>
+    <% } %>
 
 </body>
 </html>
