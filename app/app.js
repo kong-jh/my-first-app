@@ -37,6 +37,34 @@ app.post('/add', (req, res) => {
     });
 });
 
+app.get('/:id/edit', (req, res) => {
+    var id = req.params.id;
+    var sql = 'SELECT id, title, mean FROM word WHERE id=?';
+    conn.query(sql, [id], function(err, word){
+        if(err) {
+            console.log(err);
+            res.status(500).send('error');
+        } else {
+            res.render('edit', {word:word[0]});
+        }
+    });
+});
+
+app.post('/:id/edit', (req, res) => {
+    var id = req.params.id;
+    var title = req.body.title;
+    var mean = req.body.mean;
+    var sql = 'UPDATE word SET title=?, mean=? WHERE id=?';
+    conn.query(sql, [title, mean, id], function(err, result) {
+        if(err) {
+            console.log(err);
+            res.status(500).send('error');
+        } else {
+            res.redirect('/'+id);
+        }
+    });
+});
+
 app.get(['/', '/:id'], (req, res) => {
     var sql = 'SELECT id, title, mean FROM word';
     conn.query(sql, function(err, words){
