@@ -43,6 +43,19 @@ app.get(['/', '/:id'], (req, res) => {
     })
 });
 
+app.post('/search', (req, res) => {
+    var title = req.body.title;
+    var sql = 'SELECT * FROM word WHERE title=?';
+    conn.query(sql, [title], function(err, words) {
+        if(err) {
+            console.log(err);
+            res.status(500).send('error');
+        } else {
+            res.render('view', {words:words});
+        }
+    });
+});
+
 var server = app.listen(3001, () => {
     console.log("server listening on port 3001");
 });
