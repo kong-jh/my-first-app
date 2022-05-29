@@ -1,0 +1,49 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>my first app</title>
+</head>
+
+<body style="background-color:yellowgreen;">
+    <div style="text-align:center">
+        <h1><a href='/'>My first app</a></h1>
+        <br>
+        <artcle>
+            <form action="/search" method="POST">
+                <input type="text" name="title" placeholder="word">
+                <button type="submit">search</button>
+            </form>
+        </artcle>
+    </div>
+    <br>
+
+    <div style="background-color:snow; width:250px; margin:auto">
+        <h2 style="color:gray">list</h2>
+        <% if(words.length > 0) { %>
+        <ul>
+            <% for(var i=0; i< words.length; i++) { %>
+                <li><a href="/<%= words[i].id %>"><%= words[i].title %></a></li>
+            <% } %>
+        </ul>
+        <% } else { %>
+            <p>There is no such word, <br> please add</p>
+        <% } %>
+        <p><a href='/add'>add</a></p>
+    </div>
+    
+    <artcle>
+        <% if(locals.word) { %>
+            <div style="background-color:lightgrey; width:250px; margin:auto">
+                <h2><%= word.title %></h2>
+                <p><%= word.mean %></p>
+                <h3>Are you sure delete this word?</h3>
+                <a href="/<%= word.id %>">no</a>
+                <form action="/<%= word.id %>/delete" method="POST">
+                    <input type="submit" value="yes">
+                </form>
+            </div>
+        <% } %>
+    </artcle>
+
+</body>
+</html>
