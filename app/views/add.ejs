@@ -1,0 +1,29 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>my frist app</title>
+</head>
+
+<body style="background-color:yellowgreen;">
+    <div style="text-align:center">
+        <h1><a href='/'>My first app</a></h1>
+        <br>
+        <form action="/search" method="POST">
+            <input type="text" name="title" placeholder="word">
+            <button type="submit">search</button>
+        </form>
+    </div>
+    <br>
+
+    <div style="background-color:snow; width:250px; margin:auto">
+        <h2 style="color:gray">add word</h2>
+        <form action="/add" method="POST">
+            <p>title:<input type="text" name="title" placeholder="title"></p>
+            <p>mean:<input type="text" name="mean" placeholder="mean"></p>
+            <p><button type="submit">add</button></p>
+        </form>
+    </div>
+
+</body>
+</html>
+

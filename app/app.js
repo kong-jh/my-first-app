@@ -19,6 +19,24 @@ const conn = mysql.createConnection({
 
 conn.connect();
 
+app.get('/add', (req, res) => {
+    res.render('add');
+});
+
+app.post('/add', (req, res) => {
+    var sql = 'INSERT INTO word (title, mean) VALUES(?, ?)';
+    var title = req.body.title;
+    var mean = req.body.mean;
+    conn.query(sql, [title, mean], function(err, result) {
+        if(err) {
+            console.log(err);
+            res.status(500).send('error');
+        } else {
+            res.redirect('/'+result.insertId);
+        }
+    });
+});
+
 app.get(['/', '/:id'], (req, res) => {
     var sql = 'SELECT id, title, mean FROM word';
     conn.query(sql, function(err, words){
